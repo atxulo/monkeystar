@@ -3,7 +3,7 @@
 // @namespace   https://github.com/enekogb/monkeystar
 // @description Mejoras en el portfolio de Fondotop
 // @include     https://www.fondotop.com/fondotop*
-// @version     1.0.0
+// @version     1.0.1
 // @grant       none
 // ==/UserScript==
 
@@ -45,11 +45,27 @@ $('a[href^="fondotop?TX=buscador_fnd"]').each(function (index, enlace) {
     async: false, // Parche para evitar el problema de que se solapen las respuestas
     success: function (data) {
       var isinRespuesta = $(data).find('.cajasmorningtit:contains("ISIN:")').next('td').text();
-      var datosFondo = ($(data).find('.cajasmorning:eq(6) tr:eq(1) .cajasmorningcont'));   
+      var datosFondo = ($(data).find('.cajasmorning:eq(6) tr:eq(1) .cajasmorningcont'));
+      var tablaDatosOperativos = ($(data).find('td .titamarillo:contains("Datos operativos")').parents('tbody').eq(0));
+      
+      // Pintamos los datos del fondo      
       $(datosFondo).each(function (index) {
         var valor = $(this).text();
         var celda = $(filasDatos[isinRespuesta]).children() [index + 9];
         $(celda).html(valor);
+        if (valor.indexOf('-') === 0 && valor.length > 1) {
+          $(celda).css('color', 'red');
+        }
+      });
+      
+      // Mostramos los datos operativos como titulo del enlace
+      var txtDatosOperativos = '';
+      tablaDatosOperativos.find('td').each(function(index){
+        txtDatosOperativos = txtDatosOperativos + $.trim($(this).text());
+        if ((index % 2) != 1) txtDatosOperativos = txtDatosOperativos + '\r\n';
+      });    
+      $(filasDatos[isinRespuesta]).find('a[href^="fondotop?TX=buscador_fnd"]').eq(0).each(function (index, enlace) {
+         $('<img />').attr('src','http://creativecommons.org/images/information.png').attr('title', txtDatosOperativos).css('margin-left', '3px').insertAfter($(enlace));
       });
     }
   });
