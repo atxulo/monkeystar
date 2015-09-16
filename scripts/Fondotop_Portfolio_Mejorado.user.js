@@ -92,7 +92,7 @@ if ($("a:contains('Tu Cuenta de fondos')").length > 0) {
             // Pintamos los datos del fondo
             $(datosFondo).each(function (index) {
               var valor = $(this).text();
-              var celda = $(filasDatos[isinRespuesta]).children() [index + 10];
+              var celda = $(filasDatos[isinRespuesta]).children() [index + 11];
               $(celda).html(valor);
               if (valor.indexOf('-') === 0 && valor.length > 1) {
                 $(celda).css('color', 'red');
