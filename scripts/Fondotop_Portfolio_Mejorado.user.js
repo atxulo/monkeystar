@@ -2,8 +2,8 @@
 // @name        Fondotop Portfolio Mejorado
 // @namespace   https://github.com/enekogb/monkeystar
 // @description Mejoras en el portfolio de Fondotop
-// @include     https://www.fondotop.com/fondotop*
-// @version     1.0.4
+// @include     https://www.fondotop.com/fondotop*MAIN10
+// @version     1.0.5
 // @grant       none
 // ==/UserScript==
 
