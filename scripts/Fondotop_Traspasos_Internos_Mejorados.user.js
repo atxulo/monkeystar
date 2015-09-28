@@ -86,7 +86,7 @@ if($(':radio[name=RB_OPERACION][value=T]').length == 1) {
         // Pintamos los datos del fondo
         $(datosFondo).each(function (index) {
           var valor = $(this).text();
-          var celda = $(filasDatos[isinRespuesta]).children() [index + 8];
+          var celda = $(filasDatos[isinRespuesta]).children() [index + 9];
           $(celda).html(valor);
           if (valor.indexOf('-') === 0 && valor.length > 1) {
             $(celda).css('color', 'red');
