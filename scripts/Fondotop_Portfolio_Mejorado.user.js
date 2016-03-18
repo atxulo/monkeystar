@@ -3,7 +3,7 @@
 // @namespace   https://github.com/enekogb/monkeystar
 // @description Mejoras en el portfolio de Fondotop
 // @include     https://www.fondotop.com/fondotop*MAIN10
-// @version     1.0.5
+// @version     1.0.6
 // @grant       none
 // ==/UserScript==
 
@@ -88,6 +88,12 @@ if ($("a:contains('Tu Cuenta de fondos')").length > 0) {
             var tablaDatosOperativos = ($(data).find('td .titamarillo:contains("Datos operativos")').parents('tbody').eq(0));
             var tablaInversionMinima = ($(data).find('td .titamarillo:contains("nima")').parents('tbody').eq(0));
             var imgEstrellasMSTar = ($(data).find('img[src^="/images/microsites/morning/star"]'));
+
+            // Si no hay ISIN en la respuesta, no mostramos nada de este fondo
+            if ('' == isinRespuesta) {
+              console.log("No hay informacion para el fondo " + urlFondo);
+              return true;
+            }
 
             // Pintamos los datos del fondo
             $(datosFondo).each(function (index) {
